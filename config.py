@@ -1,0 +1,24 @@
+import configparser
+
+# create a ConfigParser object
+config = configparser.ConfigParser()
+
+# video database settings
+config['db_videos'] = {
+    'table_name': 'videos',
+    'file_path': 'data/videos-stats.csv',
+    'column_names': 'title, video_id, published_at, keyword, num_likes, num_comments, num_views', 
+    'column_dict': '{"id": "SERIAL PRIMARY KEY", "title": "TEXT", "video_id": "VARCHAR(255)", "published_at": "DATE", "keyword": "VARCHAR(255)", "num_likes": "BIGINT", "num_comments": "BIGINT", "num_views": "BIGINT"}'
+}
+
+# comment database settings
+config['db_comments'] = {
+    'table_name': 'comments',
+    'file_path': 'data/comments.csv',
+    'column_names': 'video_id, comment, likes, sentiment', 
+    'column_dict': '{"id": "SERIAL PRIMARY KEY", "video_id": "VARCHAR(255)", "comment": "TEXT", "likes": "BIGINT", "sentiment": "INTEGER"}'
+}
+
+# write the configuration file
+with open('config.ini', 'w') as config_file:
+    config.write(config_file)
